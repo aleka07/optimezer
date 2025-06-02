@@ -1,0 +1,6 @@
+--- Сводка (PuLP MILP - Multi-Machine) ---
+
+Статус: Optimal
+Makespan: 252.00 мин (04:12:00)
+Всего задач: 28
+CSV: production_schedule_pulp_mm.csv

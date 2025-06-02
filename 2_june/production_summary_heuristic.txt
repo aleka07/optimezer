@@ -1,0 +1,6 @@
+--- Сводка (Эвристический алгоритм) ---
+
+Общее время производства (Makespan): 1233.00 минут (20:33:00)
+Всего задач: 533, Запланировано: 372
+Использованная эвристика: Earliest Possible Start Time (EPST) + Shortest Processing Time (SPT) tie-breaker.
+CSV: production_schedule_heuristic.csv
