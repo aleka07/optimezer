@@ -8,10 +8,10 @@ import collections
 import os
 
 # --- Имя входного файла ---
-# INPUT_CSV_FILE = 'fifo_production_schedule.csv' # Должен совпадать с OUTPUT_CSV_FILE из time_minimizer.py
+INPUT_CSV_FILE = 'fifo_production_schedule.csv' # Должен совпадать с OUTPUT_CSV_FILE из time_minimizer.py
 # INPUT_CSV_FILE = 'production_schedule_v2.csv' # Должен совпадать с OUTPUT_CSV_FILE из time_minimizer.py
 # INPUT_CSV_FILE = 'scheduler_heuristic.csv' # Должен совпадать с OUTPUT_CSV_FILE из time_minimizer.py
-INPUT_CSV_FILE = 'production_schedule_v3_individual_machines.csv' # Должен совпадать с OUTPUT_CSV_FILE из time_minimizer.py
+# INPUT_CSV_FILE = 'production_schedule_v3_individual_machines.csv' # Должен совпадать с OUTPUT_CSV_FILE из time_minimizer.py
 
 
 
