@@ -3,8 +3,8 @@ import collections
 import csv
 import datetime
 from ortools.sat.python import cp_model
-
-# 6 январа
+import os
+# 7 январа
 # это версия уже без упаковки, также оан более реалистичные время делает
 
 # 1. Define Input Data
@@ -78,7 +78,7 @@ orders = {
     "Хлеб «Тартин бездрожжевой»": 12,  # Тартин бездрожжевой
     "Хлеб «Зерновой»": 139,     # Хлеб Зерновой (126) + упаковка (13)
     "Чиабатта": 28,             # Хлеб Чиабатта
-    "Булочка для гамбургера большой/ с кунжутом": 180,  
+    "Булочка для гамбургера большой с кунжутом": 180,  
     "Булочка для хотдога штучно": 342,
     "Датский": 32,              # Датский хлеб 500гр + упаковка
     "Баварский Деревенский Ржаной": 11,  # Деревенский хлеб (5) + упаковка (6)
@@ -123,8 +123,10 @@ CRITICAL_STAGE_AFTER_3 = "Выпекание"
 
 
 # --- Имя выходного файла ---
-OUTPUT_CSV_FILE = 'production_schedule_v2.csv'
-OUTPUT_TXT_FILE = 'production_summary_v2.txt'
+# --- Имя выходного файла ---
+script_dir = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_CSV_FILE = os.path.join(script_dir, 'production_schedule_v2.csv')
+OUTPUT_TXT_FILE = os.path.join(script_dir, 'production_summary_v2.txt')
 
 # 2. Helper Function & Preprocessing
 def time_str_to_minutes_int(time_str):

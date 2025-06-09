@@ -3,7 +3,7 @@ import collections
 import csv
 import datetime
 from ortools.sat.python import cp_model
-
+import os
 # 6 январа
 # это версия уже без упаковки, также оан более реалистичные время делает
 
@@ -78,7 +78,7 @@ orders = {
     "Хлеб «Тартин бездрожжевой»": 14,  # Тартин
     "Хлеб «Зерновой»": 173,        # Зерновой хлеб (160 без упаковки + 13 в упаковке)
     "Чиабатта": 21,                # Хлеб Чиабатта шт
-    "Булочка для гамбургера большой/ с кунжутом": 1520,  # Булочка для гамбургера
+    "Булочка для гамбургера большой с кунжутом": 1520,  # Булочка для гамбургера
     "Булочка для хотдога штучно": 685,  # Булочка для хотдога  
     "Датский": 31,                 # Датский хлеб 500гр в упаковке
     "Баварский Деревенский Ржаной": 12  # Деревенский хлеб 500гр
@@ -91,7 +91,7 @@ machines_available = {
     "Формовка": 2,
     "Расстойка": 8,
     "Выпекание": 6,
-    "Остывание": 25,
+    "Остывание": 50,
     # "Упаковка": 10, # Упаковку убираем из активных ресурсов, т.к. убираем этап
 }
 
@@ -122,8 +122,9 @@ CRITICAL_STAGE_AFTER_3 = "Выпекание"
 
 
 # --- Имя выходного файла ---
-OUTPUT_CSV_FILE = 'production_schedule_v2.csv'
-OUTPUT_TXT_FILE = 'production_summary_v2.txt'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_CSV_FILE = os.path.join(script_dir, 'production_schedule_v2.csv')
+OUTPUT_TXT_FILE = os.path.join(script_dir, 'production_summary_v2.txt')
 
 # 2. Helper Function & Preprocessing
 def time_str_to_minutes_int(time_str):

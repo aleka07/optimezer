@@ -4,9 +4,9 @@ import csv
 import datetime
 from ortools.sat.python import cp_model
 import os
+import itertools # <<< ДОБАВЛЕН ИМПОРТ >>>
 
-# 4 январа
-#  это версия уже без упаковки, также оан более реалистичные время делает
+# это версия уже без упаковки, также оан более реалистичные время делает
 
 # 1. Define Input Data
 tech_map_data = {
@@ -31,9 +31,9 @@ tech_map_data = {
     "Зерновой Столичный":   {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:17:00", "Остывание": "1:00:00"},
     "Здоровье":             {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:18:00", "Остывание": "1:00:00"},
     "Бородинский":          {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:20:00", "Выпекание": "0:55:00", "Остывание": "2:00:00"},
-    "Булочка для гамбургера большой с кунжутом": 
+    "Булочка для гамбургера большой с кунжутом":
                             {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:22:00", "Остывание": "0:45:00"},
-    "Булочка для хотдога штучно": 
+    "Булочка для хотдога штучно":
                             {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:22:00", "Остывание": "0:45:00"},
     "Сэндвич":              {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:22:00", "Остывание": "0:45:00"},
     "Хлеб «Тартин бездрожжевой»":
@@ -50,38 +50,40 @@ tech_map_data = {
     "Хлеб «Зерновой»":      {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:25:00", "Остывание": "1:15:00"},
     "Багет новый":          {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:25:00", "Остывание": "1:15:00"},
     "Чиабатта":             {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:25:00", "Остывание": "1:15:00"},
-    "Немецкий хлеб":        {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:25:00", "Выпекание": "0:25:00", "Остывание": "1:15:00"},
     "Багет луковый":        {"Комбинирование": "0:21:00", "Смешивание": "0:10:30", "Формовка": "0:11:00", "Расстойка": "0:20:00", "Выпекание": "0:18:00", "Остывание": "0:45:00"},
 }
 
 orders = {
-    "Формовой": 1910,                   # Формовой хлеб 600гр (1676) + упаковка (234)
-    "Мини формовой": 306,                # Формовой мини хлеб 300гр (200) + упаковка (106)
-    "Бородинский": 488,                  # Бородинский хлеб 300гр (292) + упаковка (196)
-    "Домашний": 17,                      # Домашний хлеб 600гр в упаковке
-    "Багет луковый": 33,                 # Багет Луковый 300гр в упаковке
-    "Багет новый": 219,                  # Багет Новый 300гр в упаковке
-    "Багет отрубной": 49,   # Багет Отрубной 300гр в упаковке
-    "Премиум": 20,                       # Багет Премиум 350гр в упаковке
-    "Батон Верный": 54,                  # Батон Верный 400гр в упаковке
-    "Батон Нарезной": 336,               # Батон Нарезной 400гр (253) + упаковка (83)
-    "Береке": 109,                       # Береке хлеб 420гр (53) + упаковка (56)
-    "Жайлы": 131,                        # Жайлы хлеб 600гр (85) + упаковка (46)
-    "Диета": 210,                        # Диетический хлеб (136 без упаковки + 74 в упаковке)
-    "Здоровье": 30,                      # Здоровье хлеб (5 без упаковки + 25 в упаковке)
-    "Любимый": 459,                      # Любимый хлеб 500гр (391) + упаковка (68)
-    "Немецкий хлеб": 15,                 # Немецкий хлеб 250гр в упаковке
-    "Отрубной (общий)": 161,             # Отрубной хлеб (97 без упаковки + 64 в упаковке)
-    "Плетенка": 94,                      # Плетенка (все виды: 41+19+11+23)
-    "Семейный": 212,                     # Семейный хлеб 600гр (128) + упаковка (84)
-    "Славянский": 6,                     # Славянский хлеб 600гр в упаковке
-    "Зерновой Столичный": 16,            # Столичный хлеб 450гр в упаковке
-    "Сэндвич": 1866,                     # Все виды сэндвичей (70+36+30+41+1674+15)
-    "Хлеб «Тартин бездрожжевой»": 18,    # Тартин
-    "Хлеб «Зерновой»": 113,              # Зерновой хлеб (90 без упаковки + 23 в упаковке)
-    "Чиабатта": 18,                      # Чиабатта
-    "Булочка для гамбургера большой с кунжутом": 160  # Булочка для гамбургера
-}
+    "Формовой": 2447,             # Формовой хлеб 600гр (2270) + упаковка (177)
+    "Мини формовой": 387,          # Формовой мини хлеб 300гр (298) + упаковка (89)
+    "Бородинский": 595,            # Бородинский хлеб 300гр (427) + упаковка (168)
+    "Домашний": 10,                # Домашний хлеб 600гр в упаковке
+    "Багет луковый": 56,           # Багет Луковый 300гр в упаковке
+    "Багет новый": 312,            # Багет Новый 300гр в упаковке 
+    "Багет отрубной": 72,          # Багет Отрубной 300гр в упаковке 
+    "Премиум": 11,                 # Багет Премиум 350гр в упаковке
+    "Батон Верный": 42,            # Батон Верный 400гр в упаковке
+    "Батон Нарезной": 401,         # Батон Нарезной 400гр (317) + упаковка (84)
+    "Береке": 181,                 # Береке хлеб 420гр (111) + упаковка (70)
+    "Жайлы": 190,                  # Жайлы хлеб 600гр (125) + упаковка (65)
+    "Диета": 376,                  # Диетический хлеб (259 без упаковки + 117 в упаковке)
+    "Здоровье": 13,                # Здоровье хлеб (5 без упаковки + 8 в упаковке)
+    "Любимый": 952,                # Любимый хлеб 500гр (872) + упаковка (80)
+    "Немецкий хлеб": 10,           # Немецкий хлеб 250гр в упаковке
+    "Отрубной (общий)": 294,       # Отрубной хлеб (216 без упаковки + 78 в упаковке)
+    "Плетенка": 152,               # Плетенка (все виды: 87+21+25+19)
+    "Семейный": 390,               # Семейный хлеб 600гр (282) + упаковка (108)
+    "Славянский": 8,               # Славянский хлеб 600гр в упаковке
+    "Зерновой Столичный": 20,      # Столичный хлеб 450гр в упаковке
+    "Сэндвич": 3615,               # Все виды сэндвичей (113+53+53+3389+7)
+    "Хлеб «Тартин бездрожжевой»": 14,  # Тартин
+    "Хлеб «Зерновой»": 173,        # Зерновой хлеб (160 без упаковки + 13 в упаковке)
+    "Чиабатта": 21,                # Хлеб Чиабатта шт
+    "Булочка для гамбургера большой с кунжутом": 1520,  # Булочка для гамбургера
+    "Булочка для хотдога штучно": 685,  # Булочка для хотдога  
+    "Датский": 31,                 # Датский хлеб 500гр в упаковке
+    "Баварский Деревенский Ржаной": 12  # Деревенский хлеб 500гр
+} 
 
 machines_available = {
     "Комбинирование": 2,
@@ -90,11 +92,10 @@ machines_available = {
     "Расстойка": 8,
     "Выпекание": 6,
     "Остывание": 50,
-    # "Упаковка": 10, # Упаковку убираем из активных ресурсов, т.к. убираем этап
 }
 
 BATCH_SIZE = 100
-STAGES = [ # Убрана "Упаковка"
+STAGES = [
     "Комбинирование", "Смешивание", "Формовка", "Расстойка",
     "Выпекание", "Остывание",
 ]
@@ -102,13 +103,23 @@ STAGES = [ # Убрана "Упаковка"
 # --- Параметры ---
 MAX_WAIT_COMBINING_MIXING_MIN = 1
 MAX_WAIT_MIXING_FORMING_MIN = 1
-MAX_WAIT_FORMING_PROOFING_MIN = 5 # Можно увеличить, если нет жестких ограничений
-MAX_WAIT_PROOFING_BAKING_MIN = 5  # Можно увеличить
+MAX_WAIT_FORMING_PROOFING_MIN = 5
+MAX_WAIT_PROOFING_BAKING_MIN = 5
 
-# Определяем критические этапы для ограничений по ожиданию.
-# Так как "Упаковка" убрана, последний этап в цепочке - "Выпекание"
-# Если бы были еще этапы, нужно было бы их корректно указать.
-# Сейчас ограничения будут только до Выпекания.
+# <<< НАЧАЛО ИЗМЕНЕНИЙ: ПАРАМЕТРЫ ДЛЯ ПЕРЕМЕШИВАНИЯ >>>
+# Вес штрафа. Чем он выше, тем сильнее решатель будет стараться "перемешать" партии,
+# даже если это немного увеличит общее время производства.
+# Значение 10 означает, что избегание одного "слипания" партий стоит до 10 минут общего времени.
+# Попробуйте значения от 5 до 50.
+DIVERSIFICATION_PENALTY_WEIGHT = 10
+
+# Порог времени (в минутах), в пределах которого запуск двух одинаковых партий считается
+# "последовательным" и подлежит штрафу.
+# Например, если длительность первого этапа ~20 минут, то порог в 30 минут
+# будет штрафовать запуски "сразу друг за другом".
+CONSECUTIVE_THRESHOLD_MIN = 30
+# <<< КОНЕЦ ИЗМЕНЕНИЙ >>>
+
 CRITICAL_STAGE_BEFORE_0 = "Комбинирование"
 CRITICAL_STAGE_AFTER_0 = "Смешивание"
 CRITICAL_STAGE_BEFORE_1 = "Смешивание"
@@ -118,11 +129,9 @@ CRITICAL_STAGE_AFTER_2 = "Расстойка"
 CRITICAL_STAGE_BEFORE_3 = "Расстойка"
 CRITICAL_STAGE_AFTER_3 = "Выпекание"
 
-
-# --- Имя выходного файла ---
 script_dir = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_CSV_FILE = os.path.join(script_dir, 'production_schedule_v2.csv')
-OUTPUT_TXT_FILE = os.path.join(script_dir, 'production_summary_v2.txt')
+OUTPUT_CSV_FILE = os.path.join(script_dir, 'production_schedule_v21.csv')
+OUTPUT_TXT_FILE = os.path.join(script_dir, 'production_summary_v21.txt')
 
 # 2. Helper Function & Preprocessing
 def time_str_to_minutes_int(time_str):
@@ -138,8 +147,8 @@ for product, stages_data in tech_map_data.items():
     if product not in orders or orders[product] <= 0:
         continue
     tech_map_minutes_int[product] = {}
-    for stage_name in STAGES: # Используем обновленный STAGES
-        time_str = stages_data.get(stage_name, "0:00:00") # Упаковки здесь уже не будет
+    for stage_name in STAGES:
+        time_str = stages_data.get(stage_name, "0:00:00")
         duration = time_str_to_minutes_int(time_str)
         tech_map_minutes_int[product][stage_name] = duration
 
@@ -165,18 +174,15 @@ for product, quantity_ordered in orders.items():
         current_batch_actual_size = BATCH_SIZE if not is_last_partial_batch else remaining_quantity
         
         batch_tasks = []
-        for stage_index, stage_name in enumerate(STAGES): # Используем обновленный STAGES
+        for stage_index, stage_name in enumerate(STAGES):
             base_duration_for_100 = tech_map_minutes_int.get(product, {}).get(stage_name, 0)
             current_task_duration = base_duration_for_100
 
             if base_duration_for_100 > 0:
-                if is_last_partial_batch: # Только для последней неполной партии
+                if is_last_partial_batch:
                     if stage_name in proportional_time_stages:
                         current_task_duration = math.ceil(base_duration_for_100 * (current_batch_actual_size / BATCH_SIZE))
-                    # Для других этапов (Смешивание, Расстойка, Выпекание, Остывание)
-                    # current_task_duration остается base_duration_for_100 (т.е. как для полной партии)
                 
-                # Гарантируем минимальную длительность 1, если базовая была > 0, а расчетная стала <=0
                 if current_task_duration <= 0 and base_duration_for_100 > 0:
                     current_task_duration = 1
                 
@@ -196,22 +202,16 @@ print(f"Всего партий сгенерировано: {len(all_batches)}")
 num_tasks_total = sum(len(b['tasks']) for b in all_batches)
 print(f"Всего задач (операций) с ненулевой длительностью: {num_tasks_total}")
 
-# Расчет горизонта
 horizon = 0
-# Сумма всех реальных длительностей задач
 for batch in all_batches:
     for task in batch['tasks']:
         horizon += task['duration']
-# Добавим запас, основанный на количестве партий и средней длительности этапа (грубо)
-# Это нужно, чтобы учесть параллелизм и возможное ожидание.
-# Можно взять максимальную общую длительность одной партии * кол-во партий / мин_кол_машин + запас
-# Но проще так: (сумма всех длительностей / мин_кол_машин_на_узком_месте) * некий_коэфф
-min_machines = min(m_count for m_count in machines_available.values() if m_count > 0) # Минимальное кол-во машин на любом этапе
+min_machines = min(m_count for m_count in machines_available.values() if m_count > 0)
 if min_machines > 0:
-    horizon = math.ceil(horizon / min_machines) * 2 # Примерный запас для параллелизма и ожиданий
-else: # Если где-то 0 машин, а задачи есть, будет неразрешимо, но горизонт нужен
+    horizon = math.ceil(horizon / min_machines) * 2
+else:
     horizon = horizon * 2 
-horizon += 1000 # Дополнительный буфер
+horizon += 1000
 print(f"Расчетный горизонт (макс. возможное время): {horizon} минут")
 
 
@@ -250,9 +250,9 @@ for i, batch in enumerate(all_batches):
             model.Add(task_vars[i][next_idx][0] >= task_vars[i][curr_idx][1])
 
 # b) Resources
-for stage_index, stage_name in enumerate(STAGES): # Используем обновленный STAGES
+for stage_index, stage_name in enumerate(STAGES):
     machine_count = machines_available.get(stage_name)
-    if machine_count is None or machine_count <= 0: # Упаковки уже нет в machines_available
+    if machine_count is None or machine_count <= 0:
         if any(stage_name == task['stage_name'] for batch in all_batches for task in batch['tasks']):
              print(f"Критическая ошибка: Для этапа '{stage_name}' не указано количество машин > 0, но задачи для него есть!")
         continue
@@ -277,7 +277,6 @@ critical_constraints_defined = [
 for i, batch in enumerate(all_batches):
     batch_id = batch['id']
     for stage_before, stage_after, max_wait in critical_constraints_defined:
-        # Проверяем, что оба этапа есть в STAGES (актуально, т.к. Упаковку убрали)
         if stage_before not in STAGES or stage_after not in STAGES:
             continue
 
@@ -292,7 +291,7 @@ last_stage_tasks_ends = []
 
 for i, batch in enumerate(all_batches):
      if batch['tasks']:
-        actual_last_stage_idx = batch['tasks'][-1]['stage_index'] # Последняя задача в списке задач партии
+        actual_last_stage_idx = batch['tasks'][-1]['stage_index']
         if actual_last_stage_idx in task_vars[i]:
             last_stage_tasks_ends.append(task_vars[i][actual_last_stage_idx][1])
 
@@ -301,20 +300,72 @@ if last_stage_tasks_ends:
 else:
     model.Add(makespan == 0)
 
+
+# <<< НАЧАЛО ИЗМЕНЕНИЙ: ДОБАВЛЕНИЕ ШТРАФА ЗА ПОСЛЕДОВАТЕЛЬНЫЙ ЗАПУСК >>>
+# e) Diversification Penalty (to avoid scheduling same products back-to-back)
+total_penalty = model.NewIntVar(0, len(all_batches) * len(all_batches), 'total_penalty')
+penalty_terms = []
+
+# Группируем партии по названию продукта
+batches_by_product = collections.defaultdict(list)
+for i, batch in enumerate(all_batches):
+    batches_by_product[batch['product']].append(i)
+
+first_stage_idx = STAGES.index("Комбинирование")
+
+# Для каждого продукта, у которого больше одной партии
+for product, batch_indices in batches_by_product.items():
+    if len(batch_indices) > 1:
+        # Рассматриваем все уникальные пары партий одного продукта
+        for i, j in itertools.combinations(batch_indices, 2):
+            # Проверяем, что для обеих партий есть задача на первом этапе
+            if first_stage_idx in task_vars[i] and first_stage_idx in task_vars[j]:
+                start1 = task_vars[i][first_stage_idx][0]
+                start2 = task_vars[j][first_stage_idx][0]
+                
+                # Создаем булеву переменную, которая будет истинной, если
+                # время начала этих партий слишком близко
+                are_consecutive = model.NewBoolVar(f'consecutive_{all_batches[i]["id"]}_{all_batches[j]["id"]}')
+
+                # Вычисляем абсолютную разницу во времени начала
+                diff = model.NewIntVar(-horizon, horizon, f'diff_{i}_{j}')
+                model.Add(diff == start1 - start2)
+                abs_diff = model.NewIntVar(0, horizon, f'abs_diff_{i}_{j}')
+                model.AddAbsEquality(abs_diff, diff)
+
+                # Устанавливаем связь: are_consecutive=1, если разница < порога
+                model.Add(abs_diff < CONSECUTIVE_THRESHOLD_MIN).OnlyEnforceIf(are_consecutive)
+                model.Add(abs_diff >= CONSECUTIVE_THRESHOLD_MIN).OnlyEnforceIf(are_consecutive.Not())
+
+                # Добавляем эту переменную в общий список для суммирования штрафа
+                penalty_terms.append(are_consecutive)
+
+if penalty_terms:
+    model.Add(total_penalty == sum(penalty_terms))
+else:
+    model.Add(total_penalty == 0)
+# <<< КОНЕЦ ИЗМЕНЕНИЙ >>>
+
+
 # 6. Define Objective
-model.Minimize(makespan)
+# <<< НАЧАЛО ИЗМЕНЕНИЙ: ОБНОВЛЕННАЯ ФУНКЦИЯ ЦЕЛИ >>>
+# Цель теперь - минимизировать сумму общего времени и взвешенного штрафа.
+# Это заставляет решатель находить баланс между скоростью и "перемешиванием".
+objective_var = model.NewIntVar(0, horizon * 2, 'objective_with_penalty')
+model.Add(objective_var == makespan + total_penalty * DIVERSIFICATION_PENALTY_WEIGHT)
+model.Minimize(objective_var)
+# <<< КОНЕЦ ИЗМЕНЕНИЙ >>>
 
 # 7. Solve Model
 solver = cp_model.CpSolver()
-solver.parameters.log_search_progress = True # Для отладки можно включить
-# solver.parameters.max_time_in_seconds = 300.0 
+solver.parameters.log_search_progress = True
 print("\nЗапуск решателя...")
 status = solver.Solve(model)
 print("Решатель завершил работу.")
 
 # 8. Process Results and Write to Files
 if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-    optimal_makespan_minutes = solver.ObjectiveValue()
+    optimal_makespan_minutes = solver.Value(makespan) # <<< ИЗМЕНЕНО: получаем значение из переменной makespan >>>
     print("\n--- Оптимальное/Допустимое Расписание Найдено ---")
     print(f"Минимальное Время Производства (Makespan): {optimal_makespan_minutes:.2f} минут")
     total_seconds_makespan = int(optimal_makespan_minutes * 60)
@@ -326,6 +377,12 @@ if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
     if days > 0: makespan_formatted += f"{days} дн "
     makespan_formatted += f"{hours:02}:{minutes:02}:{seconds:02}"
     print(f"Что составляет примерно: {makespan_formatted}")
+
+    # <<< НАЧАЛО ИЗМЕНЕНИЙ: ВЫВОД ИНФОРМАЦИИ О ШТРАФЕ >>>
+    final_penalty_value = solver.Value(total_penalty)
+    print(f"Итоговый штраф за 'слипание' партий: {final_penalty_value}")
+    # <<< КОНЕЦ ИЗМЕНЕНИЙ >>>
+
 
     schedule_data_for_output = []
     stage_order_map = {name: i for i, name in enumerate(STAGES)} 
@@ -366,16 +423,23 @@ if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
             txtfile.write(f"Статус решения: {'Оптимальное' if status == cp_model.OPTIMAL else 'Допустимое'}\n")
             txtfile.write(f"Общее время производства (Makespan): {optimal_makespan_minutes:.2f} минут\n")
             txtfile.write(f"Общее время производства (формат): {makespan_formatted}\n")
+            
+            # <<< НАЧАЛО ИЗМЕНЕНИЙ: ЗАПИСЬ ИНФО О ШТРАФЕ В ФАЙЛ >>>
+            txtfile.write(f"Итоговый штраф за 'слипание' партий: {final_penalty_value}\n")
+            txtfile.write(f"Вес штрафа (DIVERSIFICATION_PENALTY_WEIGHT): {DIVERSIFICATION_PENALTY_WEIGHT}\n")
+            txtfile.write(f"Порог 'слипания' (CONSECUTIVE_THRESHOLD_MIN): {CONSECUTIVE_THRESHOLD_MIN} мин\n\n")
+            # <<< КОНЕЦ ИЗМЕНЕНИЙ >>>
+
             txtfile.write(f"Всего партий: {len(all_batches)}\n")
             txtfile.write(f"Всего задач (операций) в расписании: {len(schedule_data_for_output)}\n")
             txtfile.write(f"\nПараметры модели (макс. время ожидания):\n")
             for sb, sa, mw in critical_constraints_defined:
-                 if sb in STAGES and sa in STAGES: # Выводим только актуальные
+                 if sb in STAGES and sa in STAGES:
                     txtfile.write(f"  - {sb} -> {sa}: {mw} мин\n")
             txtfile.write(f"\nРазмер партии (BATCH_SIZE): {BATCH_SIZE}\n")
             txtfile.write(f"\nЭтапы с пропорциональным временем для неполных партий: {', '.join(proportional_time_stages)}\n")
             txtfile.write(f"\nДоступные ресурсы (машины):\n")
-            for stage_name_res, count in machines_available.items(): # machines_available теперь не содержит Упаковку
+            for stage_name_res, count in machines_available.items():
                 txtfile.write(f"  - {stage_name_res}: {count}\n")
             txtfile.write(f"\nФайл с детальным расписанием: {OUTPUT_CSV_FILE}\n")
         print(f"Сводная информация успешно записана в TXT файл: '{OUTPUT_TXT_FILE}'")
