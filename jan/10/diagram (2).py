@@ -16,8 +16,9 @@ except NameError:
     script_dir = os.getcwd()
 
 # 2. Соединяем путь к этой папке с именем нашего файла
-INPUT_CSV_FILE = os.path.join(script_dir, 'production_schedule_v2.csv')
+# INPUT_CSV_FILE = os.path.join(script_dir, 'production_schedule_v2.csv')
 # INPUT_CSV_FILE = os.path.join(script_dir, 'ga_production_schedule1.csv')
+INPUT_CSV_FILE = os.path.join(script_dir, 'dqn_production_schedule.csv')
 
 # Список этапов для последовательности и цветов
 STAGES = [
