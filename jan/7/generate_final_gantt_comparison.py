@@ -66,7 +66,7 @@ def read_schedule_from_csv(filename):
         print(f"Ошибка чтения файла '{filename}': {e}")
         return None, 0
 
-# --- Функция Визуализации Диаграммы Ганта (ИЗМЕНЕНА СОРТИРОВКА И МЕТКИ) ---
+# --- Функция Визуализации Диаграммы Ганта (ВСЕ ИЗМЕНЕНИЯ ЗДЕСЬ) ---
 
 def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, stages_order):
     """
@@ -86,19 +86,13 @@ def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, sta
     font_path = None
     default_font = 'DejaVu Sans'
     try:
-        if font_path:
-            axis_font_prop = fm.FontProperties(fname=font_path, size=10)
-            bar_font_prop = fm.FontProperties(fname=font_path, size=7)
-            plt.rcParams['font.family'] = axis_font_prop.get_name()
-        else:
-            axis_font_prop = fm.FontProperties(family=default_font, size=10)
-            bar_font_prop = fm.FontProperties(family=default_font, size=7)
-            plt.rcParams['font.family'] = default_font
+        # Уменьшим размер шрифта для меток на оси, чтобы умещалось больше
+        axis_font_prop = fm.FontProperties(family=default_font, size=8)
+        plt.rcParams['font.family'] = default_font
         print(f"Используется шрифт: {plt.rcParams['font.family']} для диаграммы.")
     except RuntimeError:
         print(f"Шрифт '{default_font}' не найден. Кириллица может отображаться некорректно.")
-        axis_font_prop = fm.FontProperties(size=10)
-        bar_font_prop = fm.FontProperties(size=7)
+        axis_font_prop = fm.FontProperties(size=8)
 
     # --- Подготовка данных ---
     tasks_by_batch = collections.defaultdict(list)
@@ -129,7 +123,8 @@ def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, sta
     stage_colors_with_default = collections.defaultdict(lambda: 'grey', stage_colors)
 
     # --- Создание диаграммы ---
-    fig, ax = plt.subplots(figsize=(max(15, makespan_minutes / 25), max(8, num_batches * 0.4)))
+    # Уменьшаем высоту каждой полосы, чтобы диаграмма была компактнее
+    fig, ax = plt.subplots(figsize=(max(15, makespan_minutes / 25), max(8, num_batches * 0.3)))
 
     for batch_name in sorted_batches:
         y_pos = batch_to_y[batch_name]
@@ -139,27 +134,31 @@ def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, sta
             stage = task['Stage']; start = task['Start']; duration = task['Duration']
             if duration <= 0: continue
             color = stage_colors_with_default[stage]
-            ax.barh(y=y_pos, width=duration, left=start, height=0.6, align='center',
+            # Уменьшили высоту полосы до 0.5
+            ax.barh(y=y_pos, width=duration, left=start, height=0.5, align='center',
                     color=color, edgecolor='black', linewidth=0.5, alpha=0.9)
 
-            min_duration_for_text = makespan_minutes / 45
-            if duration > min_duration_for_text:
-                 stage_abbr = stage[:4] + '.' if len(stage) > 4 else stage
-                 text_color = 'white' if sum(color[:3]) < 1.5 else 'black'
-                 ax.text(start + duration / 2, y_pos, stage_abbr, ha='center', va='center',
-                         color=text_color, fontsize=bar_font_prop.get_size(),
-                         weight='bold', fontproperties=bar_font_prop)
+            # --- ИЗМЕНЕНИЕ: Комментируем блок, который добавляет текст внутрь полос ---
+            # min_duration_for_text = makespan_minutes / 45
+            # if duration > min_duration_for_text:
+            #      stage_abbr = stage[:4] + '.' if len(stage) > 4 else stage
+            #      text_color = 'white' if sum(color[:3]) < 1.5 else 'black'
+            #      ax.text(start + duration / 2, y_pos, stage_abbr, ha='center', va='center',
+            #              color=text_color, fontsize=bar_font_prop.get_size(),
+            #              weight='bold', fontproperties=bar_font_prop)
+            # --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
     # --- Настройка внешнего вида ---
     ax.set_yticks(range(num_batches))
-    # --- ИЗМЕНЕНИЕ: Убираем префикс 'Batch_' из названий для краткости ---
-    short_batch_labels = [b.replace('Batch_', '') for b in sorted_batches]
+    # --- ИЗМЕНЕНИЕ: Формируем короткие метки "B_1", "B_2" и т.д. ---
+    # Предполагается, что ID партии заканчивается на "_<число>" (e.g., "AnyName_12")
+    short_batch_labels = [f"B_{b.split('_')[-1]}" for b in sorted_batches]
     ax.set_yticklabels(short_batch_labels, fontproperties=axis_font_prop)
     # --- КОНЕЦ ИЗМЕНЕНИЯ ---
     ax.invert_yaxis()
 
     ax.set_xlabel("Время (минуты)", fontproperties=axis_font_prop)
-    ax.set_ylabel("Партия (сортировка по нач. времени)", fontproperties=axis_font_prop)
+    ax.set_ylabel("Партия", fontproperties=axis_font_prop)
 
     ax.set_xlim(0, math.ceil(makespan_minutes))
     ax.xaxis.grid(True, linestyle='--', color='gray', alpha=0.6)
@@ -168,9 +167,11 @@ def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, sta
     tdelta = datetime.timedelta(seconds=total_seconds)
     makespan_formatted = str(tdelta)
 
+    # --- ИЗМЕНЕНИЕ: Более короткий заголовок ---
     title_font_prop = axis_font_prop.copy(); title_font_prop.set_size(14)
-    ax.set_title(f"Диаграмма Ганта по Партиям (из файла {os.path.basename(INPUT_CSV_FILE)})\nОбщее время: {makespan_minutes:.1f} мин ({makespan_formatted})",
+    ax.set_title(f"План производства | Makespan: {makespan_minutes:.1f} мин ({makespan_formatted})",
                  fontproperties=title_font_prop, pad=15)
+    # --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
     # --- Легенда ---
     legend_patches = []
@@ -190,26 +191,20 @@ def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, sta
 
     plt.tight_layout(rect=[0, 0, 0.9, 0.95])
 
-    # --- ИЗМЕНЕНИЕ: Сохранение диаграммы в файл ---
+    # --- Сохранение диаграммы в файл (без изменений) ---
     try:
-        # 1. Определяем имя выходной папки и создаем ее
         output_dir_name = 'gantt_charts'
         output_dir = os.path.join(script_dir, output_dir_name)
         os.makedirs(output_dir, exist_ok=True)
-
-        # 2. Генерируем имя файла на основе входного CSV
         base_name = os.path.basename(INPUT_CSV_FILE)
         file_name_without_ext = os.path.splitext(base_name)[0]
         output_filename = f"{file_name_without_ext}_gantt.png"
         output_path = os.path.join(output_dir, output_filename)
-
-        # 3. Сохраняем фигуру (dpi=300 для высокого качества)
         fig.savefig(output_path, dpi=300, bbox_inches='tight')
         print(f"\nДиаграмма успешно сохранена в файл:\n{output_path}")
 
     except Exception as e:
         print(f"\nНе удалось сохранить диаграмму. Ошибка: {e}")
-    # --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
     plt.show()
 
@@ -218,7 +213,7 @@ if __name__ == "__main__":
     schedule_data, makespan = read_schedule_from_csv(INPUT_CSV_FILE)
 
     if schedule_data and makespan > 0:
-        print("\nЗапуск визуализации расписания (сортировка партий по времени начала)...")
+        print("\nЗапуск визуализации расписания...")
         plot_gantt_chart_by_batch_start_time(schedule_data, makespan, STAGES)
         print("Визуализация завершена.")
     else:
