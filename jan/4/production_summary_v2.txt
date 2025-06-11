@@ -24,4 +24,4 @@
   - Выпекание: 6
   - Остывание: 50
 
-Файл с детальным расписанием: c:\Users\SuperPC\Documents\Projects\Paper_optimizer\jan\4\production_schedule_v2.csv
+Файл с детальным расписанием: C:\Users\SuperPC\Documents\Projects\Paper_optimizer\jan\4\production_schedule_v2.csv

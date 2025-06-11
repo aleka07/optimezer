@@ -1,7 +1,7 @@
 --- Сводка по Производственному Расписанию (Генетический Алгоритм) ---
 
 Алгоритм: Генетический алгоритм (DEAP) - Правильная архитектура
-Время производства (Makespan): 1257.00 минут (20:57)
+Время производства (Makespan): 1247.00 минут (20:47)
 Всего партий: 126
 Всего задач: 756
 
@@ -25,4 +25,4 @@
   - Выпекание: 6
   - Остывание: 50
 
-Файл с детальным расписанием: c:\Users\SuperPC\Documents\Projects\Paper_optimizer\jan\7\ga_production_schedule1.csv
+Файл с детальным расписанием: C:\Users\SuperPC\Documents\Projects\Paper_optimizer\jan\7\ga_production_schedule1.csv
