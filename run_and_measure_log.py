@@ -17,6 +17,18 @@ SCRIPTS_TO_RUN = {
     'DQN (dqn copy.py)': 'dqn copy.py'
 }
 
+# --- НАЗВАНИЯ АЛГОРИТМОВ ДОЛЖНЫ СОВПАДАТЬ С analysis.py для одинакового порядка цветов ---
+# analysis.py использует: 'CP-SAT', 'GA', 'DQN'
+# run_and_measure_log.py использует ключи из SCRIPTS_TO_RUN.
+# Чтобы цвета точно совпали, нужно либо переименовать ключи, либо задать порядок.
+# Проще всего переименовать ключи, чтобы они совпадали.
+SCRIPTS_TO_RUN = {
+    'CP-SAT': 'time_min.py',
+    'GA': 'ga copy.py',
+    'DQN': 'dqn copy.py'
+}
+
+
 python_executable = sys.executable
 print(f"--- Используется интерпретатор Python из venv: {python_executable} ---")
 
@@ -37,7 +49,9 @@ for date in DATES:
 
     print(f"\nОбработка данных за {date} января...")
 
-    for alg_name, script_name in SCRIPTS_TO_RUN.items():
+    # Используем отсортированные ключи для консистентного порядка выполнения
+    for alg_name in sorted(SCRIPTS_TO_RUN.keys()):
+        script_name = SCRIPTS_TO_RUN[alg_name]
         full_script_path = os.path.join(date_path, script_name)
 
         if not os.path.isfile(full_script_path):
@@ -86,8 +100,9 @@ else:
     plt.style.use('seaborn-v0_8-whitegrid')
     fig, ax = plt.subplots(figsize=(16, 9))
 
+    # --- ИЗМЕНЕНИЕ: Установлена палитра 'viridis' для соответствия с analysis.py ---
     sns.barplot(data=results_df, x='Date', y='ExecutionTime_sec', hue='Algorithm',
-                palette='plasma', ax=ax, edgecolor='black')
+                palette='viridis', ax=ax, edgecolor='black')
 
     # --- КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Устанавливаем логарифмическую шкалу для оси Y ---
     # Это позволяет наглядно сравнивать значения, различающиеся на порядки.

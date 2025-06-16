@@ -66,133 +66,124 @@ def read_schedule_from_csv(filename):
         print(f"Ошибка чтения файла '{filename}': {e}")
         return None, 0
 
-# --- Функция Визуализации Диаграммы Ганта (ИЗМЕНЕНА СОРТИРОВКА ПАРТИЙ) ---
+# --- Функция Визуализации Диаграммы Ганта (ВСЕ ИЗМЕНЕНИЯ ЗДЕСЬ) ---
 
 def plot_gantt_chart_by_batch_start_time(schedule_results, makespan_minutes, stages_order):
     """
-    Создает диаграмму Ганта, где партии на оси Y отсортированы по времени
-    начала их первой операции.
-
-    Args:
-        schedule_results (list): Список словарей с задачами.
-        makespan_minutes (float): Общее время выполнения (makespan).
-        stages_order (list): Список названий этапов для цвета.
+    Строит линейный график: по оси X — время, по оси Y — партия (batch), этапы отмечены маркерами.
+    Легенда и подписи увеличены для читаемости.
     """
     if not schedule_results or makespan_minutes <= 0:
         print("Нет данных для визуализации или makespan некорректен.")
         return
 
-    # --- Настройка шрифта ---
-    font_path = None
+    # --- Настройка шрифтов ---
     default_font = 'DejaVu Sans'
-    try:
-        if font_path:
-            axis_font_prop = fm.FontProperties(fname=font_path, size=10)
-            bar_font_prop = fm.FontProperties(fname=font_path, size=7)
-            plt.rcParams['font.family'] = axis_font_prop.get_name()
-        else:
-            axis_font_prop = fm.FontProperties(family=default_font, size=10)
-            bar_font_prop = fm.FontProperties(family=default_font, size=7)
-            plt.rcParams['font.family'] = default_font
-        print(f"Используется шрифт: {plt.rcParams['font.family']} для диаграммы.")
-    except RuntimeError:
-        print(f"Шрифт '{default_font}' не найден. Кириллица может отображаться некорректно.")
-        axis_font_prop = fm.FontProperties(size=10)
-        bar_font_prop = fm.FontProperties(size=7)
+    axis_font_prop = fm.FontProperties(family=default_font, size=16)
+    tick_fontsize = 16
+    legend_fontsize = 18
+    title_fontsize = 20
+    plt.rcParams['font.family'] = default_font
 
     # --- Подготовка данных ---
-    # Группируем задачи по партиям
     tasks_by_batch = collections.defaultdict(list)
     all_batches_set = set()
     for task in schedule_results:
         tasks_by_batch[task['Batch']].append(task)
         all_batches_set.add(task['Batch'])
 
-    # === ИЗМЕНЕНИЕ: Вычисление времени начала для каждой партии ===
     batch_start_times = {}
     for batch_id, tasks in tasks_by_batch.items():
         if tasks:
             min_start = min(task['Start'] for task in tasks)
             batch_start_times[batch_id] = min_start
         else:
-            batch_start_times[batch_id] = float('inf') # Если у партии нет задач
+            batch_start_times[batch_id] = float('inf')
 
-    # === ИЗМЕНЕНИЕ: Сортировка партий по времени начала ===
-    # Сначала по времени начала, затем по ID партии для стабильности
     def sort_key(batch_name):
         return (batch_start_times.get(batch_name, float('inf')), batch_name)
 
     sorted_batches = sorted(list(all_batches_set), key=sort_key)
-    # =========================================================
-
     num_batches = len(sorted_batches)
-    # Обновляем Y-координаты на основе новой сортировки
     batch_to_y = {batch: i for i, batch in enumerate(sorted_batches)}
 
-    # Генерация цветов (без изменений)
     cmap = plt.get_cmap('tab20')
     num_colors = cmap.N
     stage_colors = {stage: cmap(i % num_colors) for i, stage in enumerate(stages_order)}
     stage_colors_with_default = collections.defaultdict(lambda: 'grey', stage_colors)
 
-    # --- Создание диаграммы ---
-    fig, ax = plt.subplots(figsize=(max(15, makespan_minutes / 25), max(8, num_batches * 0.4)))
+    fig, ax = plt.subplots(figsize=(max(18, makespan_minutes / 18), max(10, num_batches * 0.5)))
 
-    for batch_name in sorted_batches: # Используем новый отсортированный список
+    # Для легенды: собираем уникальные этапы
+    legend_handles = {}
+
+    for batch_name in sorted_batches:
         y_pos = batch_to_y[batch_name]
         sorted_tasks = sorted(tasks_by_batch[batch_name], key=lambda t: t['Start'])
-
+        x_points = []
+        y_points = []
+        colors = []
         for task in sorted_tasks:
-            stage = task['Stage']; start = task['Start']; duration = task['Duration']
-            if duration <= 0: continue
+            stage = task['Stage']
+            start = task['Start']
+            end = task['End']
             color = stage_colors_with_default[stage]
-            ax.barh(y=y_pos, width=duration, left=start, height=0.6, align='center',
-                    color=color, edgecolor='black', linewidth=0.5, alpha=0.9)
+            x_points.append(start)
+            y_points.append(y_pos)
+            colors.append(color)
+            # Для легенды
+            if stage not in legend_handles:
+                legend_handles[stage] = mpatches.Patch(color=color, label=stage)
+        # Соединяем этапы линией
+        if len(x_points) > 1:
+            ax.plot(x_points, y_points, color='black', linewidth=2, alpha=0.5, zorder=1)
+        # Рисуем маркеры этапов
+        ax.scatter(x_points, y_points, c=colors, s=120, edgecolor='black', linewidth=1.2, zorder=2)
 
-            min_duration_for_text = makespan_minutes / 45
-            if duration > min_duration_for_text:
-                 stage_abbr = stage[:4] + '.' if len(stage) > 4 else stage
-                 text_color = 'white' if sum(color[:3]) < 1.5 else 'black'
-                 ax.text(start + duration / 2, y_pos, stage_abbr, ha='center', va='center',
-                         color=text_color, fontsize=bar_font_prop.get_size(),
-                         weight='bold', fontproperties=bar_font_prop)
-
-    # --- Настройка внешнего вида (используем новые sorted_batches для меток оси Y) ---
+    # --- Оформление осей ---
     ax.set_yticks(range(num_batches))
-    ax.set_yticklabels(sorted_batches, fontproperties=axis_font_prop) # Метки теперь в новом порядке
+    short_batch_labels = [f"B_{b.split('_')[-1]}" for b in sorted_batches]
+    ax.set_yticklabels(short_batch_labels, fontproperties=axis_font_prop, fontsize=tick_fontsize)
     ax.invert_yaxis()
-
-    ax.set_xlabel("Время (минуты)", fontproperties=axis_font_prop)
-    ax.set_ylabel("Партия продукции (сортировка по нач. времени)", fontproperties=axis_font_prop) # Обновили подпись оси Y
-
+    ax.set_xlabel("Время (минуты)", fontproperties=axis_font_prop, fontsize=title_fontsize, labelpad=12)
+    ax.set_ylabel("Партия", fontproperties=axis_font_prop, fontsize=title_fontsize, labelpad=12)
     ax.set_xlim(0, math.ceil(makespan_minutes))
     ax.xaxis.grid(True, linestyle='--', color='gray', alpha=0.6)
+    ax.tick_params(axis='x', labelsize=tick_fontsize)
+    ax.tick_params(axis='y', labelsize=tick_fontsize)
 
+    # --- Заголовок ---
     total_seconds = int(makespan_minutes * 60)
     tdelta = datetime.timedelta(seconds=total_seconds)
     makespan_formatted = str(tdelta)
-
-    title_font_prop = axis_font_prop.copy(); title_font_prop.set_size(14)
-    ax.set_title(f"Диаграмма Ганта по Партиям (из файла {INPUT_CSV_FILE})\nОбщее время: {makespan_minutes:.1f} мин ({makespan_formatted})",
-                 fontproperties=title_font_prop, pad=15)
+    ax.set_title(f"План производства | Makespan: {makespan_minutes:.1f} мин ({makespan_formatted})",
+                 fontproperties=axis_font_prop, fontsize=title_fontsize, pad=18)
 
     # --- Легенда ---
-    legend_patches = []
-    stages_in_results = sorted(list(set(item['Stage'] for item in schedule_results)),
-                               key=lambda s: stages_order.index(s) if s in stages_order else float('inf'))
-    for stage in stages_in_results:
-        color = stage_colors_with_default[stage]
-        if stage: legend_patches.append(mpatches.Patch(color=color, label=stage))
+    if legend_handles:
+        handles = [legend_handles[stage] for stage in stages_order if stage in legend_handles]
+        ax.legend(handles=handles, title="Этапы производства", title_fontsize=legend_fontsize,
+                  fontsize=legend_fontsize, bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0.)
+        plt.subplots_adjust(right=0.78)
+    else:
+        print("Нет данных для отображения легенды.")
 
-    if legend_patches:
-        legend_title_prop = axis_font_prop.copy(); legend_title_prop.set_weight('bold')
-        ax.legend(handles=legend_patches, title="Этапы производства",
-                bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.,
-                prop=axis_font_prop, title_fontproperties=legend_title_prop)
-        plt.subplots_adjust(right=0.82)
-    else: print("Нет данных для отображения легенды.")
+    plt.tight_layout(rect=[0, 0, 0.95, 0.97])
 
-    plt.tight_layout(rect=[0, 0, 0.9, 0.95])
+    # --- Сохранение диаграммы в файл ---
+    try:
+        output_dir_name = 'gantt_charts'
+        output_dir = os.path.join(script_dir, output_dir_name)
+        os.makedirs(output_dir, exist_ok=True)
+        base_name = os.path.basename(INPUT_CSV_FILE)
+        file_name_without_ext = os.path.splitext(base_name)[0]
+        output_filename = f"{file_name_without_ext}_lineplot.png"
+        output_path = os.path.join(output_dir, output_filename)
+        fig.savefig(output_path, dpi=300, bbox_inches='tight')
+        print(f"\nДиаграмма успешно сохранена в файл:\n{output_path}")
+    except Exception as e:
+        print(f"\nНе удалось сохранить диаграмму. Ошибка: {e}")
+
     plt.show()
 
 # --- Основной блок выполнения ---
@@ -200,8 +191,7 @@ if __name__ == "__main__":
     schedule_data, makespan = read_schedule_from_csv(INPUT_CSV_FILE)
 
     if schedule_data and makespan > 0:
-        print("\nЗапуск визуализации расписания (сортировка партий по времени начала)...")
-        # Вызываем новую функцию
+        print("\nЗапуск визуализации расписания...")
         plot_gantt_chart_by_batch_start_time(schedule_data, makespan, STAGES)
         print("Визуализация завершена.")
     else:
