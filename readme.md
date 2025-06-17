@@ -1,59 +1,58 @@
-# Оптимизация производственного расписания хлебопекарного предприятия: сравнительный анализ методов
+# Bakery Production Scheduling Optimization: A Comparative Analysis of Methods
 
-## Описание проекта
+## Project Description
 
-Данный репозиторий содержит программную реализацию и экспериментальное сравнение трёх подходов к решению задачи оптимизации расписания на хлебопекарном производстве. Задача формализована как **гибридная многозадачная производственная линия (Hybrid Flow Shop)** с учётом партийности, параллельных машин, технологических и временных ограничений. Основная цель — минимизация общего времени выполнения заказов (makespan) при строгом соблюдении технологических требований.
+This repository contains the software implementation and experimental comparison of three approaches to solving a production scheduling optimization problem in a bakery. The problem is formalized as a **Hybrid Flow Shop** with considerations for batching, parallel machines, and technological and time-based constraints. The primary objective is to minimize the total completion time (makespan) while strictly adhering to all process requirements.
 
-В рамках работы реализованы и сравнены следующие методы:
-- **Точный метод:** Constraint Programming (CP-SAT, Google OR-Tools)
-- **Метаэвристика:** Генетический алгоритм (GA, DEAP)
-- **Обучение с подкреплением:** Deep Q-Network (DQN, PyTorch)
+The project implements and compares the following methods:
+- **Exact Method:** Constraint Programming (CP-SAT, Google OR-Tools)
+- **Metaheuristic:** Genetic Algorithm (GA, DEAP)
+- **Reinforcement Learning:** Deep Q-Network (DQN, PyTorch)
 
-## Структура репозитория
+## Repository Structure
 
-- `jan/` — основные экспериментальные данные и скрипты для различных дат производственных заданий. В каждой папке содержатся:
-  - `time_min.py` — реализация CP-SAT.
-  - `ga copy.py` — реализация генетического алгоритма.
-  - `dqn copy.py` — реализация DQN.
-  - CSV-файлы с расписаниями и TXT-файлы с итоговыми метриками.
-  - Скрипты для построения диаграмм Ганта и визуализации результатов.
-- `analysis.py` — анализ и визуализация качества расписаний (makespan) по дням и алгоритмам.
-- `run_and_measure.py`, `run_and_measure_log.py`, `run_and_measure_log_save_res.py` — автоматизация запуска экспериментов и сравнения времени выполнения алгоритмов.
-- `algorithms_comparison_barchart.png`, `algorithms_execution_time_comparison.png`, `algorithms_execution_time_comparison_log.png` — итоговые графики для статьи.
-- `everything_else/` — вспомогательные материалы, черновики статей, англоязычная версия описания задачи и моделей.
+- `jan/` — Contains the main experimental data and scripts for different production task dates. Each date-specific folder includes:
+  - `time_min.py` — The CP-SAT implementation.
+  - `ga copy.py` — The Genetic Algorithm implementation.
+  - `dqn copy.py` — The DQN implementation.
+  - CSV files with generated schedules and TXT files with summary metrics.
+  - Scripts for plotting Gantt charts and visualizing results.
+- `analysis.py` — A script for analyzing and visualizing schedule quality (makespan) across different days and algorithms.
+- `run_and_measure.py`, `run_and_measure_log.py`, `run_and_measure_log_save_res.py` — Scripts for automating experiment execution and comparing algorithm runtimes.
+- `algorithms_comparison_barchart.png`, `algorithms_execution_time_comparison.png`, `algorithms_execution_time_comparison_log.png` — Final plots generated for the research paper.
+=
+## Problem Formalization
 
-## Формализация задачи
+The problem is modeled as a Hybrid Flow Shop with several stages (combining, mixing, forming, proofing, baking, cooling), where multiple parallel machines are available at each stage. The product is manufactured in fixed-size batches. The goal is to determine the processing sequence for the batches and allocate operations to resources to minimize the makespan, subject to all technological and resource constraints.
 
-Задача моделируется как гибридная производственная линия с несколькими этапами (комбинирование, смешивание, формовка, расстойка, выпекание, остывание), где на каждом этапе доступно несколько параллельных машин. Продукция выпускается партиями фиксированного размера. Необходимо определить последовательность обработки партий и распределение операций по ресурсам так, чтобы минимизировать makespan при выполнении всех технологических и ресурсных ограничений.
+**Key Constraints:**
+- Precedence of stages within each batch.
+- Maximum waiting time limits between consecutive stages.
+- Constraints on the number of available machines at each stage.
+- Each operation must be assigned to exactly one machine.
 
-**Основные ограничения:**
-- Преемственность этапов внутри партии.
-- Ограничения на максимальное время ожидания между этапами.
-- Ограничения по количеству доступных машин на каждом этапе.
-- Каждая операция должна быть назначена на одну машину.
+## Description of Implemented Methods
 
-## Описание реализованных методов
+- **CP-SAT (Constraint Programming):** The problem is modeled using interval variables and global constraints. The solution is found using the Google OR-Tools solver.
+- **Genetic Algorithm:** The chromosome encodes a permutation of batches. The fitness function is the makespan, with penalties for constraint violations. The DEAP library is used for implementation.
+- **DQN (Deep Q-Network):** The environment models the production process, and an agent learns to select which batch to schedule at each step. Implemented using PyTorch.
 
-- **CP-SAT (Constraint Programming):** Моделирование задачи с помощью интервальных переменных и глобальных ограничений. Решение осуществляется с помощью Google OR-Tools.
-- **Генетический алгоритм:** Хромосома кодирует перестановку партий. Фитнес-функция — makespan с учётом штрафов за нарушение ограничений. Используется библиотека DEAP.
-- **DQN (Deep Q-Network):** Среда моделирует производственный процесс, агент обучается выбирать партии для планирования на каждом шаге. Используется PyTorch.
+## Input and Output Data Formats
 
-## Формат входных и выходных данных
+- **Input Data:** Described within the scripts, including the process flow, orders, resource parameters, and constraints.
+- **Output Data:**
+  - CSV files with schedules (`production_schedule_v2.csv`, `ga_production_schedule1.csv`, `dqn_production_schedule.csv`), containing the fields: `Batch_ID`, `Stage`, `Start_Time_Min`, `End_Time_Min`, `Duration_Min`.
+  - TXT files with final metrics (makespan, number of batches, model parameters).
+  - PNG files with comparison plots and Gantt charts.
 
-- **Входные данные:** Описаны в скриптах, включают технологическую карту, заказы, параметры ресурсов и ограничения.
-- **Выходные данные:** 
-  - CSV-файлы с расписаниями (`production_schedule_v2.csv`, `ga_production_schedule1.csv`, `dqn_production_schedule.csv`), содержащие поля: `Batch_ID`, `Stage`, `Start_Time_Min`, `End_Time_Min`, `Duration_Min`.
-  - TXT-файлы с итоговыми метриками (makespan, количество партий, параметры модели).
-  - PNG-файлы с графиками сравнения и диаграммами Ганта.
+## Reproducibility
 
-## Воспроизводимость экспериментов
+To reproduce the experiments:
+1. Install the required dependencies (see below).
+2. Run the scripts from the `jan/<date>/` directory to generate the schedules.
+3. Use `analysis.py` and the `run_and_measure*` scripts to analyze and visualize the results.
 
-Для воспроизведения экспериментов:
-1. Установите необходимые зависимости (см. ниже).
-2. Запустите скрипты из папки `jan/<дата>/` для генерации расписаний.
-3. Используйте `analysis.py` и скрипты `run_and_measure*` для анализа и визуализации результатов.
-
-## Зависимости
+## Dependencies
 
 - Python 3.8+
 - Google OR-Tools
@@ -61,22 +60,18 @@
 - PyTorch
 - pandas, matplotlib, seaborn
 
-Установить зависимости можно командой:
+Dependencies can be installed with the following command:
 ```bash
 pip install ortools deap torch pandas matplotlib seaborn
 ```
 
-## Научная новизна и результаты
+## Scientific Novelty and Results
 
-- Проведено прямое сравнение трёх классов методов на единой, детализированной модели реального производственного процесса.
-- Точный метод (CP-SAT) обеспечивает наилучшее качество расписаний (минимальный makespan).
-- Генетический алгоритм даёт близкие к оптимальным решения с высокой скоростью.
-- DQN уступает по качеству и времени, но перспективен для динамических задач.
+- A direct comparison of three distinct classes of methods on a single, detailed model of a real-world production process was conducted.
+- The exact method (CP-SAT) provides the highest quality schedules (minimal makespan).
+- The Genetic Algorithm yields near-optimal solutions with high speed.
+- DQN falls behind in both schedule quality and execution time but shows promise for dynamic scheduling tasks.
 
-## Контакт и лицензия
+## Contact and License
 
-Исходный код и данные доступны для академического использования. Для вопросов и предложений обращайтесь к авторам статьи.
-
----
-
-Если требуется README на английском языке или с иным акцентом (например, с упором на воспроизводимость или только на код), дайте знать!
+The source code and data are available for academic use. For questions and suggestions, please contact the authors of the paper.
