@@ -1,0 +1,1452 @@
+[
+  {
+    "product_name": "Хлеб «Партия бездрожжевой»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 600
+      },
+      {
+        "name": "Baking",
+        "time": 2400
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Панировочные сухари",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 600
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1800
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Формовой»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 600
+      },
+      {
+        "name": "Mixing",
+        "time": 540
+      },
+      {
+        "name": "Molding",
+        "time": 1350
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 2820
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Семейный»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Тостовый хлеб нарезанный",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 600
+      },
+      {
+        "name": "Mixing",
+        "time": 480
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 1800
+      },
+      {
+        "name": "Baking",
+        "time": 1800
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Сэндвич Панини / Сэндвич Панини с кунжутом",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 600
+      },
+      {
+        "name": "Mixing",
+        "time": 720
+      },
+      {
+        "name": "Molding",
+        "time": 1020
+      },
+      {
+        "name": "Proofing",
+        "time": 2100
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 2700
+      }
+    ]
+  },
+  {
+    "product_name": "Багет «Новый»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 1200
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Лепешка с кунжутом",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 300
+      },
+      {
+        "name": "Proofing",
+        "time": 900
+      },
+      {
+        "name": "Baking",
+        "time": 720
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Булочка для гамбургера большая / с кунжутом",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Сэндвич солодовый с семечками (первый вариант)",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Булочка для хот-дога/гамбургера",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хот-дог/Гамбургер солодовый с семечками",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Сэндвич солодовый с семечками (второй вариант)",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Чиабатта",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1200
+      },
+      {
+        "name": "Molding",
+        "time": 300
+      },
+      {
+        "name": "Proofing",
+        "time": 1800
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Сэндвич Зерновой",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Немецкий хлеб",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 300
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1200
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Зерновой»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 720
+      },
+      {
+        "name": "Molding",
+        "time": 1200
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Бриошь",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 360
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 1200
+      },
+      {
+        "name": "Proofing",
+        "time": 1500
+      },
+      {
+        "name": "Baking",
+        "time": 480
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Лепешка с сыром и луком",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 300
+      },
+      {
+        "name": "Proofing",
+        "time": 900
+      },
+      {
+        "name": "Baking",
+        "time": 720
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Солодовый с семечками»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1200
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб солодовый с семечками нарезанный",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Спорт Актив»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 600
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Зерновой солодовый хлеб нарезанный",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Зерновой солодовый»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Гречишный хлеб нарезанный",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Кукурузный хлеб",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 3000
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Булочка для хот-дог/гамбургера (World class)",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 1020
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Гречишный»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1320
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Столичный»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Здоровье»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Тостовый хлеб отрубной нарезанный",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1800
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Славянский»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Багет \"Премиум\"",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 1200
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Багет с луком",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Деревенский»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 480
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Багет отрубной»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Домашний»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Баварский»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 420
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 300
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Отрубной»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Диетический»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 1200
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 2100
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб Ржаной",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 480
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Плетенка с посыпкой (мак/кунжут)",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1200
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Батон «Верный»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1200
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Жайлы»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 600
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1500
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Булочки",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 480
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 1200
+      },
+      {
+        "name": "Baking",
+        "time": 480
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Батон «Нарезной»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1200
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Мини Формовой»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 600
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 2580
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Борике»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1200
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Любимый», «Детский»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 300
+      },
+      {
+        "name": "Mixing",
+        "time": 660
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 1620
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  },
+  {
+    "product_name": "Хлеб «Бородинский»",
+    "techprocess": [
+      {
+        "name": "Combination",
+        "time": 600
+      },
+      {
+        "name": "Mixing",
+        "time": 480
+      },
+      {
+        "name": "Molding",
+        "time": 900
+      },
+      {
+        "name": "Proofing",
+        "time": 2700
+      },
+      {
+        "name": "Baking",
+        "time": 3300
+      },
+      {
+        "name": "Cooling",
+        "time": 1200
+      }
+    ]
+  }
+]
