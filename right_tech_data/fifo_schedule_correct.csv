@@ -1,0 +1,145 @@
+Batch_ID,Stage,Start_Time_Min,End_Time_Min,Duration_Min
+Багет с луком_batch_1,Combination,0,5,5
+Багет с луком_batch_1,Mixing,5,16,11
+Багет с луком_batch_1,Molding,16,26,10
+Багет с луком_batch_1,Proofing,26,71,45
+Багет с луком_batch_1,Baking,71,98,27
+Багет с луком_batch_1,Cooling,98,118,20
+Багет с луком_batch_2,Combination,0,5,5
+Багет с луком_batch_2,Mixing,5,16,11
+Багет с луком_batch_2,Molding,16,26,10
+Багет с луком_batch_2,Proofing,26,71,45
+Багет с луком_batch_2,Baking,71,98,27
+Багет с луком_batch_2,Cooling,98,118,20
+Багет с луком_batch_3,Combination,5,10,5
+Багет с луком_batch_3,Mixing,10,21,11
+Багет с луком_batch_3,Molding,26,36,10
+Багет с луком_batch_3,Proofing,36,81,45
+Багет с луком_batch_3,Baking,81,108,27
+Багет с луком_batch_3,Cooling,108,128,20
+Багет с луком_batch_4,Combination,5,10,5
+Багет с луком_batch_4,Mixing,16,27,11
+Багет с луком_batch_4,Molding,27,37,10
+Багет с луком_batch_4,Proofing,37,82,45
+Багет с луком_batch_4,Baking,82,109,27
+Багет с луком_batch_4,Cooling,109,129,20
+Багет с луком_batch_5,Combination,10,15,5
+Багет с луком_batch_5,Mixing,16,27,11
+Багет с луком_batch_5,Molding,36,46,10
+Багет с луком_batch_5,Proofing,46,91,45
+Багет с луком_batch_5,Baking,91,118,27
+Багет с луком_batch_5,Cooling,118,138,20
+Багет с луком_batch_6,Combination,10,15,5
+Багет с луком_batch_6,Mixing,21,32,11
+Багет с луком_batch_6,Molding,37,47,10
+Багет с луком_batch_6,Proofing,47,92,45
+Багет с луком_batch_6,Baking,92,119,27
+Багет с луком_batch_6,Cooling,119,139,20
+Булочки_batch_1,Combination,15,23,8
+Булочки_batch_1,Mixing,27,38,11
+Булочки_batch_1,Molding,46,61,15
+Булочки_batch_1,Proofing,61,81,20
+Булочки_batch_1,Baking,98,106,8
+Булочки_batch_1,Cooling,106,126,20
+Булочки_batch_2,Combination,15,23,8
+Булочки_batch_2,Mixing,27,38,11
+Булочки_batch_2,Molding,47,62,15
+Булочки_batch_2,Proofing,62,82,20
+Булочки_batch_2,Baking,98,106,8
+Булочки_batch_2,Cooling,106,126,20
+Булочки_batch_3,Combination,23,31,8
+Булочки_batch_3,Mixing,32,43,11
+Булочки_batch_3,Molding,61,76,15
+Булочки_batch_3,Proofing,76,96,20
+Булочки_batch_3,Baking,106,114,8
+Булочки_batch_3,Cooling,114,134,20
+Лепешка с сыром и луком_batch_1,Combination,23,28,5
+Лепешка с сыром и луком_batch_1,Mixing,38,49,11
+Лепешка с сыром и луком_batch_1,Molding,62,67,5
+Лепешка с сыром и луком_batch_1,Proofing,71,86,15
+Лепешка с сыром и луком_batch_1,Baking,106,118,12
+Лепешка с сыром и луком_batch_1,Cooling,118,138,20
+Лепешка с сыром и луком_batch_2,Combination,28,33,5
+Лепешка с сыром и луком_batch_2,Mixing,38,49,11
+Лепешка с сыром и луком_batch_2,Molding,67,72,5
+Лепешка с сыром и луком_batch_2,Proofing,81,96,15
+Лепешка с сыром и луком_batch_2,Baking,108,120,12
+Лепешка с сыром и луком_batch_2,Cooling,120,140,20
+Лепешка с сыром и луком_batch_3,Combination,31,36,5
+Лепешка с сыром и луком_batch_3,Mixing,43,54,11
+Лепешка с сыром и луком_batch_3,Molding,72,77,5
+Лепешка с сыром и луком_batch_3,Proofing,81,96,15
+Лепешка с сыром и луком_batch_3,Baking,109,121,12
+Лепешка с сыром и луком_batch_3,Cooling,121,141,20
+Лепешка с сыром и луком_batch_4,Combination,33,38,5
+Лепешка с сыром и луком_batch_4,Mixing,49,60,11
+Лепешка с сыром и луком_batch_4,Molding,76,81,5
+Лепешка с сыром и луком_batch_4,Proofing,82,97,15
+Лепешка с сыром и луком_batch_4,Baking,114,126,12
+Лепешка с сыром и луком_batch_4,Cooling,126,146,20
+Лепешка с сыром и луком_batch_5,Combination,36,41,5
+Лепешка с сыром и луком_batch_5,Mixing,49,60,11
+Лепешка с сыром и луком_batch_5,Molding,77,82,5
+Лепешка с сыром и луком_batch_5,Proofing,82,97,15
+Лепешка с сыром и луком_batch_5,Baking,118,130,12
+Лепешка с сыром и луком_batch_5,Cooling,130,150,20
+Хлеб «Гречишный»_batch_1,Combination,38,43,5
+Хлеб «Гречишный»_batch_1,Mixing,54,65,11
+Хлеб «Гречишный»_batch_1,Molding,81,91,10
+Хлеб «Гречишный»_batch_1,Proofing,91,136,45
+Хлеб «Гречишный»_batch_1,Baking,136,158,22
+Хлеб «Гречишный»_batch_1,Cooling,158,178,20
+Хлеб «Гречишный»_batch_2,Combination,41,46,5
+Хлеб «Гречишный»_batch_2,Mixing,60,71,11
+Хлеб «Гречишный»_batch_2,Molding,82,92,10
+Хлеб «Гречишный»_batch_2,Proofing,92,137,45
+Хлеб «Гречишный»_batch_2,Baking,137,159,22
+Хлеб «Гречишный»_batch_2,Cooling,159,179,20
+Хлеб «Гречишный»_batch_3,Combination,43,48,5
+Хлеб «Гречишный»_batch_3,Mixing,60,71,11
+Хлеб «Гречишный»_batch_3,Molding,91,101,10
+Хлеб «Гречишный»_batch_3,Proofing,101,146,45
+Хлеб «Гречишный»_batch_3,Baking,146,168,22
+Хлеб «Гречишный»_batch_3,Cooling,168,188,20
+Хлеб «Гречишный»_batch_4,Combination,46,51,5
+Хлеб «Гречишный»_batch_4,Mixing,65,76,11
+Хлеб «Гречишный»_batch_4,Molding,92,102,10
+Хлеб «Гречишный»_batch_4,Proofing,102,147,45
+Хлеб «Гречишный»_batch_4,Baking,147,169,22
+Хлеб «Гречишный»_batch_4,Cooling,169,189,20
+Хлеб «Формовой»_batch_1,Combination,48,58,10
+Хлеб «Формовой»_batch_1,Mixing,71,80,9
+Хлеб «Формовой»_batch_1,Molding,101,124,23
+Хлеб «Формовой»_batch_1,Proofing,124,169,45
+Хлеб «Формовой»_batch_1,Baking,169,216,47
+Хлеб «Формовой»_batch_1,Cooling,216,236,20
+Хлеб «Формовой»_batch_2,Combination,51,61,10
+Хлеб «Формовой»_batch_2,Mixing,71,80,9
+Хлеб «Формовой»_batch_2,Molding,102,125,23
+Хлеб «Формовой»_batch_2,Proofing,125,170,45
+Хлеб «Формовой»_batch_2,Baking,170,217,47
+Хлеб «Формовой»_batch_2,Cooling,217,237,20
+Хлеб «Формовой»_batch_3,Combination,58,68,10
+Хлеб «Формовой»_batch_3,Mixing,76,85,9
+Хлеб «Формовой»_batch_3,Molding,124,147,23
+Хлеб «Формовой»_batch_3,Proofing,147,192,45
+Хлеб «Формовой»_batch_3,Baking,192,239,47
+Хлеб «Формовой»_batch_3,Cooling,239,259,20
+Хлеб «Формовой»_batch_4,Combination,61,71,10
+Хлеб «Формовой»_batch_4,Mixing,80,89,9
+Хлеб «Формовой»_batch_4,Molding,125,148,23
+Хлеб «Формовой»_batch_4,Proofing,148,193,45
+Хлеб «Формовой»_batch_4,Baking,193,240,47
+Хлеб «Формовой»_batch_4,Cooling,240,260,20
+Хлеб «Формовой»_batch_5,Combination,68,78,10
+Хлеб «Формовой»_batch_5,Mixing,80,89,9
+Хлеб «Формовой»_batch_5,Molding,147,170,23
+Хлеб «Формовой»_batch_5,Proofing,170,215,45
+Хлеб «Формовой»_batch_5,Baking,215,262,47
+Хлеб «Формовой»_batch_5,Cooling,262,282,20
+Хлеб «Формовой»_batch_6,Combination,71,81,10
+Хлеб «Формовой»_batch_6,Mixing,85,94,9
+Хлеб «Формовой»_batch_6,Molding,148,171,23
+Хлеб «Формовой»_batch_6,Proofing,171,216,45
+Хлеб «Формовой»_batch_6,Baking,216,263,47
+Хлеб «Формовой»_batch_6,Cooling,263,283,20

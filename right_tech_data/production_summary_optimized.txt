@@ -1,0 +1,27 @@
+--- Сводка по Оптимизированному Расписанию ---
+
+Статус решения: Допустимое
+Общее время производства (Makespan): 214 минут (03:34)
+Всего партий в заказе: 24
+Всего операций в расписании: 144
+
+--- Использованные параметры ---
+Размер стандартной партии: 100 шт.
+Источник тех. карты: Fixed.json
+
+Ограничения на макс. время ожидания (мин):
+  - Combination -> Mixing: 10 мин
+  - Mixing -> Molding: 5 мин
+  - Molding -> Proofing: 5 мин
+  - Proofing -> Baking: 5 мин
+  - Baking -> Cooling: 5 мин
+
+Доступные ресурсы (машины):
+  - Combination: 3
+  - Mixing: 3
+  - Molding: 2
+  - Proofing: 8
+  - Baking: 6
+  - Cooling: 150
+
+Файл с детальным расписанием: C:\Users\SuperPC\Documents\Projects\Paper_optimizer\right_tech_data\production_schedule_optimized.csv
